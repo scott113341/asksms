@@ -70,6 +70,8 @@ GEM
     rack-session (2.1.1)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
+    rackup (2.2.1)
+      rack (>= 3)
     rspec (3.13.0)
       rspec-core (~> 3.13.0)
       rspec-expectations (~> 3.13.0)
@@ -124,6 +126,7 @@ PLATFORMS
 DEPENDENCIES
   activesupport
   dotenv
+  rackup
   rspec
   ruby_llm
   sinatra

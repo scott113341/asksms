@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 gem "activesupport"
 gem "dotenv"
+gem "rackup"
 gem "ruby_llm"
 gem "sinatra"
 gem "twilio-ruby"
