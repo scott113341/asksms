@@ -17,10 +17,10 @@ class AskSMS < Sinatra::Base
     params = request.POST
     signature = request.env['HTTP_X_TWILIO_SIGNATURE']
     halt(500) unless validator.validate(url, params, signature)
-    
+
     incoming_message = params['Body']
     from_number = params['From']
-    
+
     # Get response from ChatGPT
     chat = RubyLLM.chat
     response = chat.with_instructions(
@@ -28,28 +28,28 @@ class AskSMS < Sinatra::Base
     ).ask(incoming_message)
 
     pp response
-    
+
     answer = response.content
 
     if answer.length > 800
       answer = chat.ask("Please make the answer more concise.").content
       pp answer
     end
-    
+
     # Split message if needed
     messages = Util.split_message(answer)
     pp messages
-    
+
     # Send response(s)
     messages.each do |message|
       TWILIO_CLIENT.messages.create(
-        from: ENV['TWILIO_PHONE_NUMBER'],
+        from: ENV['TWILIO_NUMBER'],
         to: from_number,
         body: message,
         smart_encoded: true
       )
     end
-    
+
     # Return empty TwiML response
     content_type('text/xml')
     <<~XML
