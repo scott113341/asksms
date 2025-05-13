@@ -9,7 +9,6 @@ gem "rackup"
 gem "ruby_llm"
 gem "sinatra"
 gem "twilio-ruby"
-gem "webrick"
 
 group :development, :test do
   gem "rspec"

@@ -113,7 +113,6 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     uri (1.0.3)
-    webrick (1.9.1)
     zeitwerk (2.7.2)
 
 PLATFORMS
@@ -135,7 +134,6 @@ DEPENDENCIES
   ruby_llm
   sinatra
   twilio-ruby
-  webrick
 
 BUNDLED WITH
    2.6.7

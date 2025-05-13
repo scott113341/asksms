@@ -3,7 +3,6 @@ require 'sinatra/base'
 require_relative './util.rb'
 
 class AskSMS < Sinatra::Base
-  set(:server, 'puma')
   set(:host_authorization, { permitted_hosts: [] })
 
   get '/' do
