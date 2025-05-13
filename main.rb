@@ -3,6 +3,13 @@ require 'dotenv/load'
 require 'ruby_llm'
 require 'twilio-ruby'
 
+Thread.new do
+  loop do
+    puts(GC.stat.to_json)
+    sleep(1.minute)
+  end
+end
+
 require_relative './app/app.rb'
 
 # Configure RubyLLM
