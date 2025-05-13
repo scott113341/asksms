@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 gem "activesupport"
 gem "dotenv"
+gem "puma"
 gem "rackup"
 gem "ruby_llm"
 gem "sinatra"

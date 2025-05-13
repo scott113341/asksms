@@ -45,6 +45,7 @@ GEM
       ruby2_keywords (~> 0.0.1)
     net-http (0.6.0)
       uri
+    nio4r (2.7.4)
     nokogiri (1.18.8-aarch64-linux-gnu)
       racc (~> 1.4)
     nokogiri (1.18.8-aarch64-linux-musl)
@@ -61,6 +62,8 @@ GEM
       racc (~> 1.4)
     nokogiri (1.18.8-x86_64-linux-musl)
       racc (~> 1.4)
+    puma (6.6.0)
+      nio4r (~> 2.0)
     racc (1.8.1)
     rack (3.1.14)
     rack-protection (4.1.1)
@@ -126,6 +129,7 @@ PLATFORMS
 DEPENDENCIES
   activesupport
   dotenv
+  puma
   rackup
   rspec
   ruby_llm
