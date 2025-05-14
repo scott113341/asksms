@@ -1,0 +1,41 @@
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+  UseCache: true
+
+Layout/LineLength:
+  Max: 120
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Metrics:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/MethodCallWithArgsParentheses:
+  Enabled: true
+  EnforcedStyle: require_parentheses
+  IgnoreMacros: false
+  AllowedMethods:
+    - require
+    - require_relative
+    - it
+    - xit
+    - describe
+    - xdescribe
+    - to
+
+Style/NumericPredicate:
+  Enabled: false
+
+Style/RedundantArgument:
+  Enabled: false
+
+Style/StringConcatenation:
+  Enabled: false
+
+Style/ZeroLengthPredicate:
+  Enabled: false

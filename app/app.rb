@@ -1,17 +1,19 @@
-require 'sinatra/base'
+# frozen_string_literal: true
 
-require_relative './util.rb'
+require('sinatra/base')
+
+require_relative('util')
 
 class AskSMS < Sinatra::Base
   set(:host_authorization, { permitted_hosts: [] })
 
-  get '/' do
-    "askSMS is running"
+  get('/') do
+    'askSMS is running'
   end
 
-  post '/sms' do
+  post('/sms') do
     # Validate request is from Twilio
-    validator = Twilio::Security::RequestValidator.new(ENV['TWILIO_AUTH_TOKEN'])
+    validator = Twilio::Security::RequestValidator.new(ENV.fetch('TWILIO_AUTH_TOKEN', nil))
     url = request.url
     params = request.POST
     signature = request.env['HTTP_X_TWILIO_SIGNATURE']
@@ -23,26 +25,25 @@ class AskSMS < Sinatra::Base
     # Get response from ChatGPT
     chat = RubyLLM.chat
     response = chat.with_instructions(
-      "Keep answers under about 600 characters and focus on being clear and direct. Do not use emojis, or Markdown, just plain text."
+      'Keep answers under about 600 characters and focus on being clear and direct. Do not use ' \
+      'emojis or Markdown, just plain text compatible with GSM-7 encoding.'
     ).ask(incoming_message)
+    pp(response)
 
-    pp response
-
-    answer = response.content
-
-    if answer.length > 800
-      answer = chat.ask("Please make the answer more concise.").content
-      pp answer
+    if response.content.length > 800
+      response = chat.ask('Please make your answer more concise.')
+      pp(response)
     end
 
     # Split message if needed
+    answer = response.content
     messages = Util.split_message(answer)
-    pp messages
+    pp(messages)
 
     # Send response(s)
     messages.each do |message|
       TWILIO_CLIENT.messages.create(
-        from: ENV['TWILIO_NUMBER'],
+        from: ENV.fetch('TWILIO_NUMBER'),
         to: from_number,
         body: message,
         smart_encoded: true
