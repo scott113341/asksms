@@ -3,6 +3,7 @@ updates:
   - package-ecosystem: "bundler"
     directory: "/"
     schedule:
+      interval: "weekly"
       day: "monday"
       time: "10:00"
     groups:
@@ -12,10 +13,12 @@ updates:
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
+      interval: "weekly"
       day: "monday"
       time: "10:00"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
+      interval: "weekly"
       day: "monday"
       time: "10:00"
