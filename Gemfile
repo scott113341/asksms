@@ -2,6 +2,8 @@
 
 source('https://rubygems.org')
 
+ruby(file: '.ruby-version')
+
 gem('activesupport')
 gem('dotenv')
 gem('puma')
