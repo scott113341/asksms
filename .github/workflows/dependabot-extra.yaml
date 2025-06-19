@@ -3,7 +3,7 @@ name: Dependabot Extra
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 10 * * 1' # Early Monday morning
+    - cron: "0 10 * * 1"
 
 permissions:
   contents: write
