@@ -22,12 +22,16 @@ class AskSMS < Sinatra::Base
     incoming_message = params['Body']
     from_number = params['From']
 
-    # Get response from ChatGPT
-    chat = RubyLLM.chat
-    response = chat.with_instructions(
-      'Keep answers under about 600 characters and focus on being clear and direct. Do not use ' \
-      'emojis or Markdown, just plain text compatible with GSM-7 encoding.'
-    ).ask(incoming_message)
+    chat = RubyLLM
+      .chat
+      .with_params(plugins: [{ id: 'web' }])
+      .with_instructions(
+        'Keep answers under about 600 characters and focus on being clear and direct. Do not use ' \
+        'emojis or Markdown, just plain text compatible with GSM-7 encoding.'
+      )
+
+    response = chat.ask(incoming_message)
+
     pp(response)
 
     if response.content.length > 800

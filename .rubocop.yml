@@ -9,6 +9,9 @@ Layout/LineLength:
 Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
 
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
 Metrics:
   Enabled: false
 

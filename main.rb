@@ -7,17 +7,10 @@ require 'twilio-ruby'
 
 require_relative 'app/app'
 
-Thread.new do
-  loop do
-    puts(GC.stat.to_json)
-    sleep(1.minute)
-  end
-end
-
 # Configure RubyLLM
 RubyLLM.configure do |config|
-  config.openai_api_key = ENV.fetch('OPENAI_API_KEY')
-  config.default_model = ENV.fetch('OPENAI_MODEL', 'gpt-4.1-nano')
+  config.openrouter_api_key = ENV.fetch('OPENROUTER_API_KEY')
+  config.default_model = ENV.fetch('OPENROUTER_MODEL', 'openai/gpt-5-nano')
 end
 
 # Initialize Twilio client
@@ -27,4 +20,4 @@ TWILIO_CLIENT = Twilio::REST::Client.new(
 )
 
 # Start the application
-AskSMS.run!
+AskSMS.run! if __FILE__ == $PROGRAM_NAME
