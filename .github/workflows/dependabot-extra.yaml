@@ -13,3 +13,6 @@ jobs:
   update-ruby-version:
     uses: scott113341/workflows/.github/workflows/update-ruby-version.yaml@main
     secrets: inherit
+    with:
+      additional_paths: |-
+        Dockerfile

@@ -1,6 +1,7 @@
 version: 2
 updates:
   - package-ecosystem: "bundler"
+    versioning-strategy: "increase"
     directory: "/"
     schedule:
       interval: "weekly"
@@ -10,12 +11,6 @@ updates:
       all:
         patterns:
           - "*"
-  - package-ecosystem: "docker"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "10:00"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
