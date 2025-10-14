@@ -4,7 +4,7 @@ AllCops:
   UseCache: true
 
 Layout/LineLength:
-  Max: 120
+  Max: 100
 
 Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
@@ -39,6 +39,15 @@ Style/RedundantArgument:
 
 Style/StringConcatenation:
   Enabled: false
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
 
 Style/ZeroLengthPredicate:
   Enabled: false

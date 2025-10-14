@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require('sinatra/base')
+require 'sinatra/base'
 
-require_relative('util')
+require_relative 'util'
 
 class AskSMS < Sinatra::Base
   set(:host_authorization, { permitted_hosts: [] })
@@ -27,7 +27,7 @@ class AskSMS < Sinatra::Base
       .with_params(plugins: [{ id: 'web' }])
       .with_instructions(
         'Keep answers under about 600 characters and focus on being clear and direct. Do not use ' \
-        'emojis or Markdown, just plain text compatible with GSM-7 encoding.'
+        'emojis or Markdown, just plain text compatible with GSM-7 encoding.',
       )
 
     response = chat.ask(incoming_message)
@@ -50,7 +50,7 @@ class AskSMS < Sinatra::Base
         from: ENV.fetch('TWILIO_NUMBER'),
         to: from_number,
         body: message,
-        smart_encoded: true
+        smart_encoded: true,
       )
     end
 

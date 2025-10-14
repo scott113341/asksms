@@ -15,7 +15,7 @@ RSpec.describe Util do
       result = Util.split_message(long_message)
       expect(result).to match([
         start_with('1/2: a'),
-        start_with('2/2: a')
+        start_with('2/2: a'),
       ])
     end
 
@@ -26,7 +26,7 @@ RSpec.describe Util do
       result = Util.split_message(message)
       expect(result).to match([
         start_with('1/2: this message is 300 long'),
-        start_with('2/2: message is 300 long this')
+        start_with('2/2: message is 300 long this'),
       ])
     end
   end

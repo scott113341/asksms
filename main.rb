@@ -16,7 +16,7 @@ end
 # Initialize Twilio client
 TWILIO_CLIENT = Twilio::REST::Client.new(
   ENV.fetch('TWILIO_ACCOUNT_SID'),
-  ENV.fetch('TWILIO_AUTH_TOKEN')
+  ENV.fetch('TWILIO_AUTH_TOKEN'),
 )
 
 # Start the application
