@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/scott113341/ruby_llm-cost
+  revision: 8c772445ce85b508ea7b838fb26e905cb53cd40a
+  specs:
+    ruby_llm-cost (0.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -66,6 +72,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.18.10-x86_64-linux-musl)
       racc (~> 1.4)
+    openssl (3.3.1)
     parallel (1.27.0)
     parser (3.3.9.0)
       ast (~> 2.4.1)
@@ -95,7 +102,7 @@ GEM
     rspec-expectations (3.13.5)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
-    rspec-mocks (3.13.5)
+    rspec-mocks (3.13.6)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
     rspec-support (3.13.6)
@@ -133,7 +140,7 @@ GEM
       rack-session (>= 2.0.0, < 3)
       tilt (~> 2.0)
     tilt (2.6.1)
-    twilio-ruby (7.8.3)
+    twilio-ruby (7.8.4)
       faraday (>= 0.9, < 3.0)
       jwt (>= 1.5, < 4.0)
       nokogiri (>= 1.6, < 2.0)
@@ -158,11 +165,13 @@ PLATFORMS
 DEPENDENCIES
   activesupport
   dotenv
+  openssl
   puma
   rackup
   rspec
   rubocop
   ruby_llm
+  ruby_llm-cost!
   sinatra
   twilio-ruby
 

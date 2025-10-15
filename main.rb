@@ -3,6 +3,7 @@
 require 'active_support/all'
 require 'dotenv/load'
 require 'ruby_llm'
+require 'ruby_llm/cost'
 require 'twilio-ruby'
 
 require_relative 'app/app'

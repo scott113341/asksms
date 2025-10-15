@@ -39,6 +39,8 @@ class AskSMS < Sinatra::Base
       pp(response)
     end
 
+    puts("Cost: $#{chat.total_cost}")
+
     # Split message if needed
     answer = response.content
     messages = Util.split_message(answer)

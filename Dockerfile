@@ -7,4 +7,4 @@ RUN bundle install
 COPY ./ ./
 
 ENV RACK_ENV=production
-ENTRYPOINT ["ruby", "main.rb"]
+ENTRYPOINT ["bundle", "exec", "ruby", "main.rb"]
