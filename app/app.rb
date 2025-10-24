@@ -1,23 +1,23 @@
 # frozen_string_literal: true
 
-require 'sinatra/base'
+require "sinatra/base"
 
-require_relative 'util'
+require_relative "util"
 
 class AskSMS < Sinatra::Base
-  set(:host_authorization, { permitted_hosts: [] })
+  set(:host_authorization, {permitted_hosts: []})
 
-  get('/') do
-    'askSMS is running'
+  get("/") do
+    "askSMS is running"
   end
 
-  post('/sms') do
+  post("/sms") do
     # Validate request is from Twilio
     halt(500) unless Util.twilio_valid_request?(request)
 
     params = request.POST
-    incoming_message = params['Body']
-    from_number = params['From']
+    incoming_message = params["Body"]
+    from_number = params["From"]
 
     chat, answer = Util.get_answer(incoming_message)
     messages = Util.split_into_messages(answer)
@@ -28,11 +28,11 @@ class AskSMS < Sinatra::Base
     # Send response(s)
     Util.send_messages(
       to: from_number,
-      messages: messages,
+      messages: messages
     )
 
     # Return empty TwiML response
-    content_type('text/xml')
+    content_type("text/xml")
     Util.empty_twiml_response
   end
 end

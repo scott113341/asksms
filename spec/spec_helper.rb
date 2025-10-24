@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require 'dotenv'
-require 'rspec'
-require 'vcr'
-require 'webmock/rspec'
+require "dotenv"
+require "rspec"
+require "vcr"
+require "webmock/rspec"
 
-Dotenv.load('.example.env')
+Dotenv.load(".example.env")
 
-require_relative '../main'
+require_relative "../main"
 
 RSpec.configure do |config|
   config.example_status_persistence_file_path = nil
@@ -15,7 +15,7 @@ end
 
 VCR.configure do |c|
   c.hook_into(:webmock)
-  c.cassette_library_dir = File.expand_path('cassettes', __dir__)
+  c.cassette_library_dir = File.expand_path("cassettes", __dir__)
   c.configure_rspec_metadata!
 
   %w[
@@ -30,6 +30,6 @@ VCR.configure do |c|
   c.default_cassette_options = {
     record: :new_episodes,
     match_requests_on: %i[method uri body],
-    drop_unused_requests: true,
+    drop_unused_requests: true
   }
 end
