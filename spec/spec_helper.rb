@@ -4,6 +4,8 @@ require 'rspec'
 require 'vcr'
 require 'webmock/rspec'
 
+Dotenv.load('.example.env')
+
 require_relative '../main'
 
 RSpec.configure do |config|
