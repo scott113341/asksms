@@ -17,4 +17,6 @@ gem('twilio-ruby')
 group(:development, :test) do
   gem('rspec')
   gem('rubocop')
+  gem('vcr')
+  gem('webmock')
 end
