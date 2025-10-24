@@ -1,0 +1,155 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://openrouter.ai/api/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"perplexity/sonar","messages":[{"role":"developer","content":"Focus
+        on being clear and direct. DO NOT use emojis, Markdown, or citations. Use
+        only raw plaintext compatible with GSM-7 encoding."},{"role":"user","content":"Who
+        is the current president?"}],"stream":false,"plugins":[{"id":"web"}],"max_tokens":128}'
+    headers:
+      User-Agent:
+      - Faraday v2.14.0
+      Authorization:
+      - Bearer <OPENROUTER_API_KEY>
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 24 Oct 2025 05:37:45 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Vary:
+      - Accept-Encoding
+      Permissions-Policy:
+      - payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com"
+        "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")
+      Referrer-Policy:
+      - no-referrer, strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 99371fa84dfee73f-DEN
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        CiAgICAgICAgIAoKICAgICAgICAgCgogICAgICAgICAKCiAgICAgICAgIAoKICAgICAgICAgCgogICAgICAgICAKCiAgICAgICAgIAoKICAgICAgICAgCgogICAgICAgICAKCiAgICAgICAgIAoKICAgICAgICAgCnsiaWQiOiJnZW4tMTc2MTI4NDI2MS1xZ0psTGtHRUJ6Q3RHaXJFcEQ5RSIsInByb3ZpZGVyIjoiUGVycGxleGl0eSIsIm1vZGVsIjoicGVycGxleGl0eS9zb25hciIsIm9iamVjdCI6ImNoYXQuY29tcGxldGlvbiIsImNyZWF0ZWQiOjE3NjEyODQyNjIsImNob2ljZXMiOlt7ImxvZ3Byb2JzIjpudWxsLCJmaW5pc2hfcmVhc29uIjoic3RvcCIsIm5hdGl2ZV9maW5pc2hfcmVhc29uIjoic3RvcCIsImluZGV4IjowLCJtZXNzYWdlIjp7InJvbGUiOiJhc3Npc3RhbnQiLCJjb250ZW50IjoiVGhlIGN1cnJlbnQgcHJlc2lkZW50IG9mIHRoZSBVbml0ZWQgU3RhdGVzIGlzIERvbmFsZCBKb2huIFRydW1wLCB3aG8gaXMgc2VydmluZyBoaXMgc2Vjb25kIHRlcm0gYXMgdGhlIDQ3dGggcHJlc2lkZW50LiBIZSB3YXMgaW5hdWd1cmF0ZWQgb24gSmFudWFyeSAyMCwgMjAyNSwgYWZ0ZXIgd2lubmluZyB0aGUgMjAyNCBwcmVzaWRlbnRpYWwgZWxlY3Rpb24uIFRoaXMgaXMgaGlzIHNlY29uZCBwcmVzaWRlbmN5LCBoYXZpbmcgcHJldmlvdXNseSBzZXJ2ZWQgYXMgdGhlIDQ1dGggcHJlc2lkZW50IGZyb20gMjAxNyB0byAyMDIxWzFdWzJdWzZdWzhdLiIsInJlZnVzYWwiOm51bGwsInJlYXNvbmluZyI6bnVsbCwiYW5ub3RhdGlvbnMiOlt7InR5cGUiOiJ1cmxfY2l0YXRpb24iLCJ1cmxfY2l0YXRpb24iOnsidXJsIjoiaHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvU2Vjb25kX3ByZXNpZGVuY3lfb2ZfRG9uYWxkX1RydW1wIiwic3RhcnRfaW5kZXgiOjAsImVuZF9pbmRleCI6MCwidGl0bGUiOiJlbi53aWtpcGVkaWEub3JnL3dpa2kvU2Vjb25kX3ByZXNpZGVuY3lfb2ZfRG9uYWxkX1RydW1wIn19LHsidHlwZSI6InVybF9jaXRhdGlvbiIsInVybF9jaXRhdGlvbiI6eyJ1cmwiOiJodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9Eb25hbGRfVHJ1bXAiLCJzdGFydF9pbmRleCI6MCwiZW5kX2luZGV4IjowLCJ0aXRsZSI6ImVuLndpa2lwZWRpYS5vcmcvd2lraS9Eb25hbGRfVHJ1bXAifX0seyJ0eXBlIjoidXJsX2NpdGF0aW9uIiwidXJsX2NpdGF0aW9uIjp7InVybCI6Imh0dHBzOi8vd3d3LndoaXRlaG91c2UuZ292L2FkbWluaXN0cmF0aW9uL2RvbmFsZC1qLXRydW1wLyIsInN0YXJ0X2luZGV4IjowLCJlbmRfaW5kZXgiOjAsInRpdGxlIjoid3d3LndoaXRlaG91c2UuZ292L2FkbWluaXN0cmF0aW9uL2RvbmFsZC1qLXRydW1wLyJ9fSx7InR5cGUiOiJ1cmxfY2l0YXRpb24iLCJ1cmxfY2l0YXRpb24iOnsidXJsIjoiaHR0cHM6Ly93d3cud2hpdGVob3VzZS5nb3YvYWRtaW5pc3RyYXRpb24vIiwic3RhcnRfaW5kZXgiOjAsImVuZF9pbmRleCI6MCwidGl0bGUiOiJ3d3cud2hpdGVob3VzZS5nb3YvYWRtaW5pc3RyYXRpb24vIn19LHsidHlwZSI6InVybF9jaXRhdGlvbiIsInVybF9jaXRhdGlvbiI6eyJ1cmwiOiJodHRwczovL3RydW1wd2hpdGVob3VzZS5hcmNoaXZlcy5nb3YvcGVvcGxlL2RvbmFsZC1qLXRydW1wLyIsInN0YXJ0X2luZGV4IjowLCJlbmRfaW5kZXgiOjAsInRpdGxlIjoidHJ1bXB3aGl0ZWhvdXNlLmFyY2hpdmVzLmdvdi9wZW9wbGUvZG9uYWxkLWotdHJ1bXAvIn19LHsidHlwZSI6InVybF9jaXRhdGlvbiIsInVybF9jaXRhdGlvbiI6eyJ1cmwiOiJodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9QcmVzaWRlbnRfb2ZfdGhlX1VuaXRlZF9TdGF0ZXMiLCJzdGFydF9pbmRleCI6MCwiZW5kX2luZGV4IjowLCJ0aXRsZSI6ImVuLndpa2lwZWRpYS5vcmcvd2lraS9QcmVzaWRlbnRfb2ZfdGhlX1VuaXRlZF9TdGF0ZXMifX0seyJ0eXBlIjoidXJsX2NpdGF0aW9uIiwidXJsX2NpdGF0aW9uIjp7InVybCI6Imh0dHBzOi8vd3d3LndoaXRlaG91c2UuZ292L3ByZXNpZGVudGlhbC1hY3Rpb25zLyIsInN0YXJ0X2luZGV4IjowLCJlbmRfaW5kZXgiOjAsInRpdGxlIjoid3d3LndoaXRlaG91c2UuZ292L3ByZXNpZGVudGlhbC1hY3Rpb25zLyJ9fSx7InR5cGUiOiJ1cmxfY2l0YXRpb24iLCJ1cmxfY2l0YXRpb24iOnsidXJsIjoiaHR0cHM6Ly93d3cudXNhLmdvdi9wcmVzaWRlbnRzIiwic3RhcnRfaW5kZXgiOjAsImVuZF9pbmRleCI6MCwidGl0bGUiOiJ3d3cudXNhLmdvdi9wcmVzaWRlbnRzIn19LHsidHlwZSI6InVybF9jaXRhdGlvbiIsInVybF9jaXRhdGlvbiI6eyJ1cmwiOiJodHRwczovL3d3dy5mZWRlcmFscmVnaXN0ZXIuZ292L3ByZXNpZGVudGlhbC1kb2N1bWVudHMvZXhlY3V0aXZlLW9yZGVycy9kb25hbGQtdHJ1bXAvMjAyNSIsInN0YXJ0X2luZGV4IjowLCJlbmRfaW5kZXgiOjAsInRpdGxlIjoid3d3LmZlZGVyYWxyZWdpc3Rlci5nb3YvcHJlc2lkZW50aWFsLWRvY3VtZW50cy9leGVjdXRpdmUtb3JkZXJzL2RvbmFsZC10cnVtcC8yMDI1In19LHsidHlwZSI6InVybF9jaXRhdGlvbiIsInVybF9jaXRhdGlvbiI6eyJ1cmwiOiJodHRwczovL3d3dy53aGl0ZWhvdXNlLmdvdi92aWRlb3MvcHJlc2lkZW50LXRydW1wLW1ha2VzLWFuLWFubm91bmNlbWVudC1vY3QtMjMtMjAyNS8iLCJzdGFydF9pbmRleCI6MCwiZW5kX2luZGV4IjowLCJ0aXRsZSI6Ind3dy53aGl0ZWhvdXNlLmdvdi92aWRlb3MvcHJlc2lkZW50LXRydW1wLW1ha2VzLWFuLWFubm91bmNlbWVudC1vY3QtMjMtMjAyNS8ifX0seyJ0eXBlIjoidXJsX2NpdGF0aW9uIiwidXJsX2NpdGF0aW9uIjp7InVybCI6Imh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9MG1vT3hGandkbjQiLCJzdGFydF9pbmRleCI6MCwiZW5kX2luZGV4IjowLCJ0aXRsZSI6Ind3dy55b3V0dWJlLmNvbS93YXRjaCJ9fSx7InR5cGUiOiJ1cmxfY2l0YXRpb24iLCJ1cmxfY2l0YXRpb24iOnsidXJsIjoiaHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvUHJlc2lkZW50X29mX3RoZV9Vbml0ZWRfU3RhdGVzIiwic3RhcnRfaW5kZXgiOjAsImVuZF9pbmRleCI6MCwidGl0bGUiOiJQcmVzaWRlbnQgb2YgdGhlIFVuaXRlZCBTdGF0ZXMgLSBXaWtpcGVkaWEiLCJjb250ZW50IjoiW0p1bXAgdG8gY29udGVudF0oaHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL2VuLndpa2lwZWRpYS5vcmcjYm9keUNvbnRlbnQpXG5cbkZyb20gV2lraXBlZGlhLCB0aGUgZnJlZSBlbmN5Y2xvcGVkaWFcblxuSGVhZCBvZiBzdGF0ZSBhbmQgZ292ZXJubWVudCBvZiB0aGUgVW5pdGVkIFN0YXRlc1xuXG5Gb3IgYSBsaXN0IG9mIHByZXNpZGVudHMgb2YgdGhlIFVuaXRlZCBTdGF0ZXMsIHNlZSBbTGlzdCBvZiBwcmVzaWRlbnRzIG9mIHRoZSBVbml0ZWQgU3RhdGVzXShodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9MaXN0X29mX3ByZXNpZGVudHNfb2ZfdGhlX1VuaXRlZF9TdGF0ZXMpLkZvciBvdGhlciB1c2VzLCBzZWUgW1ByZXNpZGVudCBvZiB0aGUgVW5pdGVkIFN0YXRlcyAoZGlzYW1iaWd1YXRpb24pXShodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9QcmVzaWRlbnRfb2ZfdGhlX1VuaXRlZF9TdGF0ZXNfKGRpc2FtYmlndWF0aW9uKSkuXG5cbnwgUHJlc2lkZW50IG9mIHRoZSBVbml0ZWQgU3RhdGVzIHxcbnwgLS0tIHxcbnwgW1ByZXNpZGVudGlhbCBzZWFsXShodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9TZWFsX29mX3RoZV9wcmVzaWRlbnRfb2ZfdCJ9fSx7InR5cGUiOiJ1cmxfY2l0YXRpb24iLCJ1cmxfY2l0YXRpb24iOnsidXJsIjoiaHR0cHM6Ly93d3cudXNhLmdvdi9wcmVzaWRlbnRzIiwic3RhcnRfaW5kZXgiOjAsImVuZF9pbmRleCI6MCwidGl0bGUiOiJQcmVzaWRlbnRzLCB2aWNlIHByZXNpZGVudHMsIGFuZCBmaXJzdCBsYWRpZXMgLSBVU0FHb3YiLCJjb250ZW50IjoiW1NraXAgdG8gbWFpbiBjb250ZW50XShodHRwczovL3d3dy51c2EuZ292L3d3dy51c2EuZ292I3NraXAtdG8taDEpXG5cbiMgUHJlc2lkZW50cywgdmljZSBwcmVzaWRlbnRzLCBhbmQgZmlyc3QgbGFkaWVzXG5cbkxlYXJuIGFib3V0IHRoZSBkdXRpZXMgb2YgcHJlc2lkZW50LCB2aWNlIHByZXNpZGVudCwgYW5kIGZpcnN0IGxhZHkgb2YgdGhlIFVuaXRlZCBTdGF0ZXMuIEZpbmQgb3V0IGhvdyB0byBjb250YWN0IGFuZCBsZWFybiBtb3JlIGFib3V0IGN1cnJlbnQgYW5kIHBhc3QgbGVhZGVycy5cblxuIyMgUHJlc2lkZW50IG9mIHRoZSBVbml0ZWQgU3RhdGVzXG5cblRoZSBwcmVzaWRlbnQgb2YgdGhlIFVuaXRlZCBTdGF0ZXMgaXMgdGhlOlxuXG4tIFUuUy4gaGVhZCBvZiBzdGF0ZVxuLSBMZWFkZXIgb2YgdGhlIGV4ZWN1dGl2ZSBicmFuY2hcbi0gQ29tbWFuZGVyIGluIGNoaWVmIG9mIHRoZSBhcm1lZCBmb3JjZXNcblxuIyMjIEN1cnJlbnQgcHJlc2lkZW50XG5cbltUaGUgNDd0aCBhbmQgY3VycmVudCBwcmVzaWRlbnQgb2YgdGhlIFVuaXRlZCBTdGF0ZXMgaXMgRG9uYWxkIEpvaG4gVHJ1bXAuXShodHRwczovL3d3dy53aGl0ZWhvdXNlLmdvdi9hZG1pbmlzdHJhdGlvbi9kb25hbCJ9fSx7InR5cGUiOiJ1cmxfY2l0YXRpb24iLCJ1cmxfY2l0YXRpb24iOnsidXJsIjoiaHR0cHM6Ly93d3cud2hpdGVob3VzZS5nb3YvYWRtaW5pc3RyYXRpb24vIiwic3RhcnRfaW5kZXgiOjAsImVuZF9pbmRleCI6MCwidGl0bGUiOiJUaGUgVHJ1bXAgQWRtaW5pc3RyYXRpb24gLSBUaGUgV2hpdGUgSG91c2UiLCJjb250ZW50IjoiIyBUaGUgQWRtaW5pc3RyYXRpb25cblxuIyMgW0RvbmFsZCBKLiBUcnVtcF0oaHR0cHM6Ly93d3cud2hpdGVob3VzZS5nb3YvYWRtaW5pc3RyYXRpb24vZG9uYWxkLWotdHJ1bXAvKVxuXG40NXRoICYgNDd0aCBQcmVzaWRlbnQgb2YgdGhlIFVuaXRlZCBTdGF0ZXNcblxuQWZ0ZXIgYSBsYW5kc2xpZGUgZWxlY3Rpb24gdmljdG9yeSBpbiAyMDI0LCBQcmVzaWRlbnQgRG9uYWxkIEouIFRydW1wIGlzIHJldHVybmluZyB0byB0aGUgV2hpdGUgSG91c2UgdG8gYnVpbGQgdXBvbiBoaXMgcHJldmlvdXMgc3VjY2Vzc2VzIGFuZCB1c2UgaGlzIG1hbmRhdGUgdG8gcmVqZWN0IHRoZSBleHRyZW1pc3QgcG9saWNpZXMgb2YgdGhlIHJhZGljYWwgbGVmdCB3aGlsZSBwcm92aWRpbmcgdGFuZ2libGUgcXVhbGl0eSBvZiBsaWZlIGltcHJvdmVtZW50cyBmb3IgdGhlIEFtZXJpY2FuIHBlb3BsZS5cblxuIyMgW0pEIFZhbmNlXShodHRwczovL3d3dy53aGl0ZWhvdXNlLmdvdi9hZG1pbmlzdHJhdGlvbi9qZC12YW5jZS8pXG5cblZpY2UgUHJlc2lkZW50IG9mIHRoZSBVbml0ZWQgU3RhdGVzXG5cbkluIDIwMjQsIFByZXNpZGVudCBEb25hbGQgSi4gVHJ1bXAgZXh0ZW5kZWQgSkQgdGhlIGluY3JlIn19LHsidHlwZSI6InVybF9jaXRhdGlvbiIsInVybF9jaXRhdGlvbiI6eyJ1cmwiOiJodHRwczovL3d3dy53aGl0ZWhvdXNlLmdvdi9hZG1pbmlzdHJhdGlvbi9kb25hbGQtai10cnVtcC8iLCJzdGFydF9pbmRleCI6MCwiZW5kX2luZGV4IjowLCJ0aXRsZSI6IlByZXNpZGVudCBEb25hbGQgSi4gVHJ1bXAgLSBUaGUgV2hpdGUgSG91c2UiLCJjb250ZW50IjoiW0FkbWluaXN0cmF0aW9uXShodHRwczovL3d3dy53aGl0ZWhvdXNlLmdvdi9hZG1pbmlzdHJhdGlvbi8pXG5cbiMgRG9uYWxkIEouIFRydW1wXG5cbjQ1dGggJiA0N3RoIFByZXNpZGVudCBvZiB0aGUgVW5pdGVkIFN0YXRlc1xuXG5BZnRlciBhIGxhbmRzbGlkZSBlbGVjdGlvbiB2aWN0b3J5IGluIDIwMjQsIFByZXNpZGVudCBEb25hbGQgSi4gVHJ1bXAgaXMgcmV0dXJuaW5nIHRvIHRoZSBXaGl0ZSBIb3VzZSB0byBidWlsZCB1cG9uIGhpcyBwcmV2aW91cyBzdWNjZXNzZXMgYW5kIHVzZSBoaXMgbWFuZGF0ZSB0byByZWplY3QgdGhlIGV4dHJlbWlzdCBwb2xpY2llcyBvZiB0aGUgcmFkaWNhbCBsZWZ0IHdoaWxlIHByb3ZpZGluZyB0YW5naWJsZSBxdWFsaXR5IG9mIGxpZmUgaW1wcm92ZW1lbnRzIGZvciB0aGUgQW1lcmljYW4gcGVvcGxlLlxuXG5UaGlzIGluY2x1ZGVzIHB1dHRpbmcgYSBzdG9wIHRvIGVuZGxlc3Mgd2FycywgZGVmZW5kaW5nIG91ciBuYXRpb27igJlzIGJvcmRlcnMsIGFuZCB1bmxlYXNoaW5nIHRoZSBwb3RlbnRpYWwgb2YgdGhlIEFtZXJpY2FuIGVjb25vbXksIGFmZm9yZGluZyBBTEwgQW1lcmljYW5zIHRoZSBvcHBvcnR1bml0eSB0byBwdXJzdWUgVCJ9fV19fV0sImNpdGF0aW9ucyI6WyJodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9TZWNvbmRfcHJlc2lkZW5jeV9vZl9Eb25hbGRfVHJ1bXAiLCJodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9Eb25hbGRfVHJ1bXAiLCJodHRwczovL3d3dy53aGl0ZWhvdXNlLmdvdi9hZG1pbmlzdHJhdGlvbi9kb25hbGQtai10cnVtcC8iLCJodHRwczovL3d3dy53aGl0ZWhvdXNlLmdvdi9hZG1pbmlzdHJhdGlvbi8iLCJodHRwczovL3RydW1wd2hpdGVob3VzZS5hcmNoaXZlcy5nb3YvcGVvcGxlL2RvbmFsZC1qLXRydW1wLyIsImh0dHBzOi8vZW4ud2lraXBlZGlhLm9yZy93aWtpL1ByZXNpZGVudF9vZl90aGVfVW5pdGVkX1N0YXRlcyIsImh0dHBzOi8vd3d3LndoaXRlaG91c2UuZ292L3ByZXNpZGVudGlhbC1hY3Rpb25zLyIsImh0dHBzOi8vd3d3LnVzYS5nb3YvcHJlc2lkZW50cyIsImh0dHBzOi8vd3d3LmZlZGVyYWxyZWdpc3Rlci5nb3YvcHJlc2lkZW50aWFsLWRvY3VtZW50cy9leGVjdXRpdmUtb3JkZXJzL2RvbmFsZC10cnVtcC8yMDI1IiwiaHR0cHM6Ly93d3cud2hpdGVob3VzZS5nb3YvdmlkZW9zL3ByZXNpZGVudC10cnVtcC1tYWtlcy1hbi1hbm5vdW5jZW1lbnQtb2N0LTIzLTIwMjUvIiwiaHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj0wbW9PeEZqd2RuNCJdLCJ1c2FnZSI6eyJwcm9tcHRfdG9rZW5zIjoxMTg5LCJjb21wbGV0aW9uX3Rva2VucyI6ODIsInRvdGFsX3Rva2VucyI6MTI3MX19
+  recorded_at: Fri, 24 Oct 2025 05:37:46 GMT
+- request:
+    method: get
+    uri: https://openrouter.ai/api/v1/generation?id=gen-1761284261-qgJlLkGEBzCtGirEpD9E
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <OPENROUTER_API_KEY>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - openrouter.ai
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Date:
+      - Fri, 24 Oct 2025 05:37:46 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Vary:
+      - Accept-Encoding
+      Permissions-Policy:
+      - payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com"
+        "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")
+      Referrer-Policy:
+      - no-referrer, strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 99371fc9bc61533b-DEN
+    body:
+      encoding: ASCII-8BIT
+      string: '{"error":{"message":"Generation gen-1761284261-qgJlLkGEBzCtGirEpD9E
+        not found","code":404}}'
+  recorded_at: Fri, 24 Oct 2025 05:37:46 GMT
+- request:
+    method: get
+    uri: https://openrouter.ai/api/v1/generation?id=gen-1761284261-qgJlLkGEBzCtGirEpD9E
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <OPENROUTER_API_KEY>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - openrouter.ai
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 24 Oct 2025 05:37:46 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Vary:
+      - Accept-Encoding
+      Permissions-Policy:
+      - payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com"
+        "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")
+      Referrer-Policy:
+      - no-referrer, strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 99371fcacba05388-DEN
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"created_at":"2025-10-24T05:37:46.736265+00:00","model":"perplexity/sonar","app_id":null,"external_user":null,"streamed":true,"cancelled":false,"latency":3332,"moderation_latency":null,"generation_time":842,"tokens_prompt":1210,"tokens_completion":78,"native_tokens_prompt":1189,"native_tokens_completion":82,"native_tokens_completion_images":null,"native_tokens_reasoning":0,"native_tokens_cached":0,"num_media_prompt":null,"num_input_audio_prompt":null,"num_media_completion":0,"num_search_results":4,"origin":"","is_byok":false,"finish_reason":"stop","native_finish_reason":"stop","usage":0.022271,"api_type":"completions","id":"gen-1761284261-qgJlLkGEBzCtGirEpD9E","upstream_id":"a859e2fd-f53b-4fdb-a66c-5b4716e2bb75","total_cost":0.022271,"cache_discount":null,"upstream_inference_cost":0,"provider_name":"Perplexity"}}'
+  recorded_at: Fri, 24 Oct 2025 05:37:46 GMT
+recorded_with: VCR 6.3.1
