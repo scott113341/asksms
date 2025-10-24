@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'dotenv'
 require 'rspec'
 require 'vcr'
 require 'webmock/rspec'
