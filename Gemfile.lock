@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/scott113341/ruby_llm-cost
-  revision: 8c772445ce85b508ea7b838fb26e905cb53cd40a
+  revision: eab45bcd7b7bca97fbf023829e2e2cd68a17e5ba
   specs:
-    ruby_llm-cost (0.0.1)
+    ruby_llm-cost (0.0.2)
 
 GEM
   remote: https://rubygems.org/
