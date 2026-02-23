@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/scott113341/ruby_llm-cost
-  revision: eab45bcd7b7bca97fbf023829e2e2cd68a17e5ba
+  revision: e78f9e4c24c6dff97aaab89ab1b60837438da8ec
   specs:
-    ruby_llm-cost (0.0.2)
+    ruby_llm-cost (0.0.3)
 
 GEM
   remote: https://rubygems.org/
@@ -78,7 +78,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.19.0-x86_64-linux-musl)
       racc (~> 1.4)
-    openssl (4.0.0)
+    openssl (4.0.1)
     parallel (1.27.0)
     parser (3.3.10.1)
       ast (~> 2.4.1)
@@ -134,17 +134,17 @@ GEM
       rubocop-ast (>= 1.47.1, < 2.0)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
-    ruby_llm (1.12.0)
+    ruby_llm (1.12.1)
       base64
       event_stream_parser (~> 1)
       faraday (>= 2.0)
       faraday-multipart (>= 1)
       faraday-net_http (>= 1)
       faraday-retry (>= 2.0)
-      marcel (~> 1.0)
-      ruby_llm-schema (~> 0.2.1)
+      marcel (~> 1)
+      ruby_llm-schema (~> 0)
       zeitwerk (~> 2)
-    ruby_llm-schema (0.2.5)
+    ruby_llm-schema (0.3.0)
     securerandom (0.4.1)
     sinatra (4.2.1)
       logger (>= 1.6.0)
@@ -181,7 +181,7 @@ GEM
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    zeitwerk (2.7.4)
+    zeitwerk (2.7.5)
 
 PLATFORMS
   aarch64-linux-gnu
