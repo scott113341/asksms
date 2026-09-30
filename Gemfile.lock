@@ -1,9 +1,3 @@
-GIT
-  remote: https://github.com/scott113341/ruby_llm-cost
-  revision: e78f9e4c24c6dff97aaab89ab1b60837438da8ec
-  specs:
-    ruby_llm-cost (0.0.3)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -203,7 +197,6 @@ DEPENDENCIES
   rackup
   rspec
   ruby_llm
-  ruby_llm-cost!
   sinatra
   standard (>= 1.35.1)
   twilio-ruby
