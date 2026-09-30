@@ -29,7 +29,7 @@ VCR.configure do |c|
 
   c.default_cassette_options = {
     record: :new_episodes,
-    match_requests_on: %i[method uri body],
+    match_requests_on: %i[method uri body_as_json],
     drop_unused_requests: true
   }
 end

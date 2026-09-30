@@ -18,8 +18,9 @@ module Util
   # so the caller may access cost and other details.
   def self.get_answer(incoming_message)
     chat = RubyLLM
-      .chat
-      .with_params(plugins: [{id: "web"}], max_tokens: 128)
+      .chat(provider: :openrouter)
+      .with_provider_options(plugins: [{id: "web"}])
+      .with_max_output_tokens(128)
       .with_instructions(
         "Focus on being clear and direct. DO NOT use emojis, Markdown, or citations. Use only " \
         "raw plaintext compatible with GSM-7 encoding."

@@ -22,7 +22,7 @@ class AskSMS < Sinatra::Base
     chat, answer = Util.get_answer(incoming_message)
     messages = Util.split_into_messages(answer)
 
-    puts("Cost: $#{chat.total_cost}")
+    puts("Cost: $#{chat.cost.total}")
     pp(messages)
 
     # Send response(s)
