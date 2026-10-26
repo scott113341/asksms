@@ -47,6 +47,7 @@ GEM
     lint_roller (1.1.0)
     logger (1.7.0)
     marcel (2.1.0)
+    mini_portile2 (2.8.9)
     minitest (6.0.6)
       drb (~> 2.0)
       prism (~> 1.5)
@@ -59,6 +60,9 @@ GEM
     net-protocol (0.4.0)
       timeout
     nio4r (2.7.5)
+    nokogiri (1.19.4)
+      mini_portile2 (~> 2.8.2)
+      racc (~> 1.4)
     nokogiri (1.19.4-aarch64-linux-gnu)
       racc (~> 1.4)
     nokogiri (1.19.4-aarch64-linux-musl)
@@ -206,7 +210,7 @@ DEPENDENCIES
   webmock
 
 RUBY VERSION
-  ruby 4.0.7
+  ruby 4.0.9
 
 BUNDLED WITH
-  4.1.0.beta1
+  4.1.0.beta2
