@@ -6,19 +6,27 @@ on:
 
 jobs:
   test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: ruby/setup-ruby@v1
+      - run: rustup toolchain install stable
+      - uses: Swatinem/rust-cache@v2
         with:
-          bundler-cache: true
-      - run: bundle exec rspec
+          shared-key: "cache"
+      - name: Test
+        run: cargo test
 
   lint:
+    name: Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: ruby/setup-ruby@v1
+      - run: rustup toolchain install stable --component rustfmt,clippy
+      - uses: Swatinem/rust-cache@v2
         with:
-          bundler-cache: true
-      - run: bundle exec standardrb
+          shared-key: "cache"
+      - name: Check formatting
+        run: cargo fmt --check
+      - name: Clippy
+        run: cargo clippy --all-targets -- -D warnings
