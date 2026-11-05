@@ -37,12 +37,10 @@ pub async fn sms(
     let body = param(&params, "Body").unwrap_or_default();
     let from = param(&params, "From").ok_or(StatusCode::BAD_REQUEST)?;
 
-    let answer = llm::get_answer(&state.http, config, body)
-        .await
-        .map_err(|err| {
-            tracing::error!("getting an answer failed: {err:#}");
-            StatusCode::INTERNAL_SERVER_ERROR
-        })?;
+    let answer = llm::get_answer(&state.llm, body).await.map_err(|err| {
+        tracing::error!("getting an answer failed: {err:#}");
+        StatusCode::INTERNAL_SERVER_ERROR
+    })?;
     let messages = split_into_messages(&answer.text, SMS_LENGTH);
     tracing::info!(cost = answer.cost, ?messages, "sending reply");
 

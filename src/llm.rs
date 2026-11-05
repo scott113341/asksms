@@ -1,14 +1,21 @@
-use anyhow::{Context, bail};
-use serde::{Deserialize, Serialize};
+use rig_core::Model;
+use rig_core::completion::{CompletionRequest, Message};
+use rig_core::providers::openai::wire::{OPENROUTER, OpenAiWire};
+use rig_core::providers::openai::{OpenAIConfig, Route};
+use rig_core::providers::openrouter::extension::{OpenRouterExt, OpenRouterOptions};
+use rig_reqwest::ReqwestClient;
 use serde_json::json;
 
 use crate::Config;
 
 const INSTRUCTIONS: &str = "Focus on being clear and direct. DO NOT use emojis, Markdown, or \
     citations. Use only raw plaintext compatible with GSM-7 encoding.";
-const MAX_OUTPUT_TOKENS: u32 = 128;
+const MAX_OUTPUT_TOKENS: u64 = 128;
 const MAX_ANSWER_CHARS: usize = 800;
 const CONCISE_PROMPT: &str = "Please make your answer more concise.";
+
+/// The OpenRouter chat model every request goes to.
+pub type LlmModel = Model<OpenAiWire>;
 
 /// The model's final answer and the total cost of the requests that produced it.
 #[derive(Debug)]
@@ -17,65 +24,25 @@ pub struct Answer {
     pub cost: f64,
 }
 
-#[derive(Debug, Serialize)]
-struct Message {
-    role: &'static str,
-    content: String,
-}
-
-impl Message {
-    fn new(role: &'static str, content: impl Into<String>) -> Self {
-        Self {
-            role,
-            content: content.into(),
-        }
-    }
-}
-
-#[derive(Debug, Deserialize)]
-struct ChatResponse {
-    choices: Vec<Choice>,
-    usage: Option<Usage>,
-}
-
-#[derive(Debug, Deserialize)]
-struct Choice {
-    message: ResponseMessage,
-    finish_reason: Option<String>,
-}
-
-#[derive(Debug, Deserialize)]
-struct ResponseMessage {
-    content: Option<String>,
-}
-
-#[derive(Debug, Deserialize)]
-struct Usage {
-    prompt_tokens: Option<u64>,
-    completion_tokens: Option<u64>,
-    cost: Option<f64>,
+/// Builds the OpenRouter model, sending through `http` so its timeout applies.
+pub fn model(http: &reqwest::Client, config: &Config) -> LlmModel {
+    OpenAIConfig::with_key(&OPENROUTER, config.openrouter_api_key.clone())
+        .with_base_url(config.openrouter_base_url.clone())
+        .with_route(Route::Chat)
+        .connect(ReqwestClient::from(http.clone()))
+        .completion(config.openrouter_model.clone())
 }
 
 /// Asks the model to answer the incoming message. If the first answer is too long,
 /// asks it (in the same conversation) to make the answer more concise.
-pub async fn get_answer(
-    http: &reqwest::Client,
-    config: &Config,
-    incoming: &str,
-) -> anyhow::Result<Answer> {
-    let mut messages = vec![
-        Message::new("system", INSTRUCTIONS),
-        Message::new("user", incoming),
-    ];
-
-    let (mut text, mut cost) = complete(http, config, &messages).await?;
+pub async fn get_answer(model: &LlmModel, incoming: &str) -> anyhow::Result<Answer> {
+    let (mut text, mut cost) = ask(model, &[], incoming).await?;
 
     let len = text.chars().count();
     if len > MAX_ANSWER_CHARS {
         tracing::info!(len, "response too long, asking for a more concise answer");
-        messages.push(Message::new("assistant", text));
-        messages.push(Message::new("user", CONCISE_PROMPT));
-        let (concise, concise_cost) = complete(http, config, &messages).await?;
+        let history = [Message::user(incoming), Message::assistant(text)];
+        let (concise, concise_cost) = ask(model, &history, CONCISE_PROMPT).await?;
         text = concise;
         cost += concise_cost;
     }
@@ -83,53 +50,35 @@ pub async fn get_answer(
     Ok(Answer { text, cost })
 }
 
-/// Sends one chat completion request and returns the reply's text and cost.
-async fn complete(
-    http: &reqwest::Client,
-    config: &Config,
-    messages: &[Message],
-) -> anyhow::Result<(String, f64)> {
-    let body = json!({
-        "model": config.openrouter_model,
-        "messages": messages,
-        "max_tokens": MAX_OUTPUT_TOKENS,
-        "plugins": [{ "id": "web" }],
-        "usage": { "include": true },
-    });
+/// Sends `prompt` after `history` and returns the reply's text and cost.
+async fn ask(model: &LlmModel, history: &[Message], prompt: &str) -> anyhow::Result<(String, f64)> {
+    let request = CompletionRequest::new(Message::user(prompt))
+        .preamble(INSTRUCTIONS)
+        .messages(history.iter().cloned())
+        .max_tokens(MAX_OUTPUT_TOKENS)
+        .provider_option(OpenRouterOptions::new().plugin(json!({ "id": "web" })));
 
-    let res = http
-        .post(format!("{}/chat/completions", config.openrouter_base_url))
-        .bearer_auth(&config.openrouter_api_key)
-        .json(&body)
-        .send()
-        .await?;
-
-    let status = res.status();
-    if !status.is_success() {
-        let text = res.text().await.unwrap_or_default();
-        bail!("OpenRouter returned {status}: {text}");
-    }
-
-    let response: ChatResponse = res.json().await.context("parsing OpenRouter response")?;
-    let usage = response.usage;
-    let choice = response
-        .choices
-        .into_iter()
-        .next()
-        .context("OpenRouter response has no choices")?;
-    let text = choice.message.content.unwrap_or_default();
+    let response = model.call(request).await?;
+    let text = response.text();
+    let cost = response
+        .extras::<OpenRouterExt>()
+        .and_then(Result::ok)
+        .and_then(|extras| extras.cost);
+    let logs_url = response
+        .response_id()
+        .map(|id| format!("https://openrouter.ai/logs?transaction={id}"));
 
     tracing::info!(
-        finish_reason = choice.finish_reason.as_deref(),
-        prompt_tokens = usage.as_ref().and_then(|u| u.prompt_tokens),
-        completion_tokens = usage.as_ref().and_then(|u| u.completion_tokens),
-        cost = usage.as_ref().and_then(|u| u.cost),
+        logs_url,
+        finish_reason = ?response.finish_reason(),
+        input_tokens = response.usage.input_tokens,
+        output_tokens = response.usage.output_tokens,
+        cost,
         text,
         "LLM response"
     );
 
-    let cost = usage.and_then(|u| u.cost).unwrap_or(0.0);
-    Ok((text, cost))
+    Ok((text, cost.unwrap_or(0.0)))
 }
 
 #[cfg(test)]
@@ -142,12 +91,29 @@ mod tests {
 
     fn completion(content: &str, cost: f64) -> ResponseTemplate {
         ResponseTemplate::new(200).set_body_json(json!({
+            "id": "gen-1",
+            "object": "chat.completion",
+            "created": 1_761_284_632,
+            "model": "test/model",
             "choices": [{
+                "index": 0,
                 "message": { "role": "assistant", "content": content },
                 "finish_reason": "stop"
             }],
-            "usage": { "prompt_tokens": 10, "completion_tokens": 20, "cost": cost }
+            "usage": {
+                "prompt_tokens": 10,
+                "completion_tokens": 20,
+                "total_tokens": 30,
+                "cost": cost
+            }
         }))
+    }
+
+    fn test_model(server: &MockServer) -> LlmModel {
+        model(
+            &reqwest::Client::new(),
+            &Config::for_tests(&server.uri(), &server.uri()),
+        )
     }
 
     #[tokio::test]
@@ -159,7 +125,7 @@ mod tests {
             .and(body_partial_json(json!({
                 "model": "test/model",
                 "messages": [
-                    { "role": "system", "content": INSTRUCTIONS },
+                    { "role": "system", "content": [{ "type": "text", "text": INSTRUCTIONS }] },
                     { "role": "user", "content": "When does the brewery open?" }
                 ],
                 "max_tokens": 128,
@@ -170,14 +136,9 @@ mod tests {
             .mount(&server)
             .await;
 
-        let config = Config::for_tests(&server.uri(), &server.uri());
-        let answer = get_answer(
-            &reqwest::Client::new(),
-            &config,
-            "When does the brewery open?",
-        )
-        .await
-        .unwrap();
+        let answer = get_answer(&test_model(&server), "When does the brewery open?")
+            .await
+            .unwrap();
 
         assert_eq!(answer.text, "It opens at 11:00 AM on Saturday.");
         assert_eq!(answer.cost, 0.0012);
@@ -194,7 +155,7 @@ mod tests {
                 "messages": [
                     { "role": "system" },
                     { "role": "user", "content": "Tell me everything" },
-                    { "role": "assistant", "content": long_answer },
+                    { "role": "assistant" },
                     { "role": "user", "content": CONCISE_PROMPT }
                 ]
             })))
@@ -209,8 +170,7 @@ mod tests {
             .mount(&server)
             .await;
 
-        let config = Config::for_tests(&server.uri(), &server.uri());
-        let answer = get_answer(&reqwest::Client::new(), &config, "Tell me everything")
+        let answer = get_answer(&test_model(&server), "Tell me everything")
             .await
             .unwrap();
 
@@ -219,7 +179,7 @@ mod tests {
 
         let requests = server.received_requests().await.unwrap();
         let last: Value = requests.last().unwrap().body_json().unwrap();
-        assert_eq!(last["messages"].as_array().unwrap().len(), 4);
+        assert_eq!(last["messages"].as_array().unwrap().len(), 4, "{last}");
     }
 
     #[tokio::test]
@@ -230,10 +190,7 @@ mod tests {
             .mount(&server)
             .await;
 
-        let config = Config::for_tests(&server.uri(), &server.uri());
-        let err = get_answer(&reqwest::Client::new(), &config, "hi")
-            .await
-            .unwrap_err();
-        assert!(err.to_string().contains("401"), "{err}");
+        let err = get_answer(&test_model(&server), "hi").await.unwrap_err();
+        assert!(err.to_string().contains("401"), "{err:#}");
     }
 }

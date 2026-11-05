@@ -54,6 +54,18 @@ impl Config {
 pub struct AppState {
     config: Arc<Config>,
     http: reqwest::Client,
+    llm: llm::LlmModel,
+}
+
+impl AppState {
+    fn new(config: Config, http: reqwest::Client) -> Self {
+        let llm = llm::model(&http, &config);
+        Self {
+            config: Arc::new(config),
+            http,
+            llm,
+        }
+    }
 }
 
 fn app(state: AppState) -> Router {
@@ -90,11 +102,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let listener = tokio::net::TcpListener::bind(&config.listen).await?;
     tracing::info!("listening on {}", listener.local_addr()?);
 
-    let state = AppState {
-        config: Arc::new(config),
-        http,
-    };
-    axum::serve(listener, app(state))
+    axum::serve(listener, app(AppState::new(config, http)))
         .with_graceful_shutdown(shutdown_signal())
         .await?;
     Ok(())
@@ -151,13 +159,10 @@ mod tests {
         }
 
         fn app(&self) -> Router {
-            app(AppState {
-                config: Arc::new(Config::for_tests(
-                    &self.openrouter.uri(),
-                    &self.twilio.uri(),
-                )),
-                http: reqwest::Client::new(),
-            })
+            app(AppState::new(
+                Config::for_tests(&self.openrouter.uri(), &self.twilio.uri()),
+                reqwest::Client::new(),
+            ))
         }
     }
 
@@ -198,8 +203,16 @@ mod tests {
         Mock::given(method("POST"))
             .and(path("/chat/completions"))
             .respond_with(ResponseTemplate::new(200).set_body_json(json!({
-                "choices": [{ "message": { "content": ANSWER }, "finish_reason": "stop" }],
-                "usage": { "cost": 0.0061 }
+                "id": "gen-1",
+                "object": "chat.completion",
+                "created": 1_761_284_632,
+                "model": "test/model",
+                "choices": [{
+                    "index": 0,
+                    "message": { "role": "assistant", "content": ANSWER },
+                    "finish_reason": "stop"
+                }],
+                "usage": { "prompt_tokens": 10, "completion_tokens": 90, "cost": 0.0061 }
             })))
             .expect(1)
             .mount(&mocks.openrouter)
