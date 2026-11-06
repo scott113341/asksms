@@ -1,0 +1,9 @@
+question = "how long to let snow set up after piling before digging cave into it"
+criteria = """
+This is a quinzhee: piled snow needs time to sinter (bond) before it's hollowed
+out. The usual guidance is about 2 hours, and anything in the range of 1.5 to 3
+hours is correct. Mentioning that it can take longer (even overnight) in very cold
+weather or with dry powder, or that mixing and packing the snow speeds it up, is a
+plus. Saying under an hour is enough, or that it always needs to sit overnight, is
+wrong.
+"""

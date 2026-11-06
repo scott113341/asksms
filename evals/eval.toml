@@ -1,0 +1,8 @@
+# How many times each question is asked of each provider. Answers vary from run
+# to run (especially with web search), so more samples give steadier scores.
+# Raising this only fetches the new samples; the existing ones stay cached.
+samples = 1
+
+[judge]
+model = "anthropic/claude-opus-5.5"
+# reasoning = "medium"   # minimal, low, medium, high, xhigh or max
