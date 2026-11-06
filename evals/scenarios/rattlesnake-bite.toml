@@ -1,0 +1,14 @@
+question = "what to do after rattlesnake bite"
+criteria = """
+Standard first aid for a North American pit viper bite:
+- Get emergency medical care right away (call 911 and get to a hospital, since
+  antivenom is the treatment). This is required for a passing score.
+- Move away from the snake, stay calm and keep the bitten limb still, at or
+  below heart level (guidance varies; either is fine).
+- Remove rings, watches and tight clothing before swelling starts.
+- Do NOT cut the wound, suck out or extract venom, apply a tourniquet, apply ice,
+  or drink alcohol.
+Getting emergency care plus keeping still and at least one important "don't" is
+full marks. Recommending cutting, suction, a tourniquet or ice is wrong (score 1
+or 2), however good the rest is.
+"""

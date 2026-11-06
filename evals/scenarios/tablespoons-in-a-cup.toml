@@ -1,0 +1,5 @@
+question = "how many tablespoons in a cup"
+criteria = """
+16 tablespoons in a US cup. Mentioning other measures (such as 48 teaspoons) is
+fine but not required.
+"""

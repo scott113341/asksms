@@ -1,3 +1,5 @@
 .git
 .env
 /target
+/evals/.cache
+/evals/results

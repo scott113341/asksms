@@ -1,0 +1,6 @@
+question = "when does mainstage brewing in Lyons open today?"
+criteria = """
+MainStage Brewing Company in Lyons, Colorado opens at 11 AM. Saying it opens at
+11 AM is full marks. Any other opening time is wrong. Saying it doesn't know, or
+only suggesting the person check the website, is wrong.
+"""

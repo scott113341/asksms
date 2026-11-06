@@ -11,7 +11,7 @@ RUN rm -rf src
 # Build the actual project
 COPY . ./
 RUN touch src/main.rs
-RUN cargo build --release
+RUN cargo build --release --bin asksms
 
 # Debian version must match the builder's, since the binary links against glibc.
 # Includes the CA certificates that reqwest's TLS verifier reads at runtime.

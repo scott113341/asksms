@@ -1,0 +1,18 @@
+question = "how to splint a broken arm in the backcountry"
+criteria = """
+Standard wilderness first aid. A good answer covers most of these:
+- Immobilize the joints above and below the break (for a forearm, the wrist and
+  elbow), using something rigid such as a SAM splint, sticks, trekking poles or a
+  rolled foam pad.
+- Pad the splint and splint the arm in the position found or a comfortable
+  position of function. Don't try to straighten it.
+- Secure it snugly but not tightly, then check circulation, sensation and movement
+  in the fingers before and after splinting, and loosen it if they get worse.
+- Support it with a sling (and ideally a swath to bind it to the body).
+- Get out to medical care.
+Mentioning removing rings or covering an open wound is a plus. Covering the first
+four points is full marks, even briefly, in any wording. Telling the person to
+straighten, set or pull the bone back into place is wrong (score 1 or 2). The one
+exception is standard wilderness first responder training: if there's no pulse or
+feeling past the break, gently realigning it is correct.
+"""
