@@ -1,4 +1,4 @@
-FROM rust:1.99.1-trixie AS builder
+FROM rust:1.100.0-trixie AS builder
 WORKDIR /usr/src/asksms
 
 # Compile dependencies with a stub main.rs so they can be cached
