@@ -64,7 +64,7 @@ fn evals_dir() -> PathBuf {
 
 /// The current local time, for timestamps in the cache and results.
 pub fn now() -> String {
-    jiff::Zoned::now()
+    jiff::ZonedDateTime::now()
         .strftime("%Y-%m-%d %H:%M:%S %Z")
         .to_string()
 }
@@ -168,7 +168,9 @@ async fn run(args: Args) -> anyhow::Result<bool> {
 
     let results = dir.join("results");
     fs::create_dir_all(&results).context("creating evals/results")?;
-    let stem = jiff::Zoned::now().strftime("%Y-%m-%dT%H-%M-%S").to_string();
+    let stem = jiff::ZonedDateTime::now()
+        .strftime("%Y-%m-%dT%H-%M-%S")
+        .to_string();
     let json_path = results.join(format!("{stem}.json"));
     let html_path = results.join(format!("{stem}.html"));
     fs::write(&json_path, serde_json::to_vec_pretty(&report)?)?;
